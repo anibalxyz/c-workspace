@@ -18,17 +18,16 @@ sudo ./scripts/install.sh
 
 Edita el archivo `src/main.c`. Por defecto incluye el típico "Hello World".
 
-También se incluye una versión comentada `src/main_comentado.c` para los que aún no conozcan C (como yo).
-
 Compila el archivo:
 
 ```bash
 # gcc        -> compilador de C
 # -Wall      -> (W = Warnings, all) activa las advertencias principales (variables no usadas, etc.)
 # -Wextra    -> activa advertencias adicionales y más estrictas (comparación signed/unsigned, etc.)
-# src/main.c -> archivo fuente
+# -Iinclude  -> (I = Include) especifica las carpetas de inclusión, en este caso 'include'
+# src/*.c    -> todos los archivos .c en la carpeta src
 # -o         -> (o = output = salida) especifica el archivo ejecutable/binario
-gcc -Wall -Wextra src/main.c -o bin/main
+gcc -Wall -Wextra -Iinclude src/*.c -o bin/main
 ```
 
 Ejecuta el binario:
