@@ -2,6 +2,8 @@
 
 Entorno de desarrollo para trabajar con C/C++.
 
+Por defecto el proyecto incluye un "Hello World".
+
 > [!NOTE] En este punto aún no se soporta C++ directamente.
 
 ## Instalación
@@ -16,22 +18,44 @@ sudo ./scripts/install.sh
 
 ### Manual
 
-Edita el archivo `src/main.c`. Por defecto incluye el típico "Hello World".
+Edita el código fuente `src/` y las cabeceras `include/` a tu gusto.
 
-Compila el archivo:
+En esta versión manual, se compilará **todo** (sin importar si hubieron cambios) directo al binario.
+
+Compila:
 
 ```bash
-# gcc        -> compilador de C
-# -Wall      -> (W = Warnings, all) activa las advertencias principales (variables no usadas, etc.)
-# -Wextra    -> activa advertencias adicionales y más estrictas (comparación signed/unsigned, etc.)
-# -Iinclude  -> (I = Include) especifica las carpetas de inclusión, en este caso 'include'
-# src/*.c    -> todos los archivos .c en la carpeta src
-# -o         -> (o = output = salida) especifica el archivo ejecutable/binario
-gcc -Wall -Wextra -Iinclude src/*.c -o bin/main
+mkdir -p bin
+gcc -Wall -Wextra -Iinclude $(find src -name "*.c") -o bin/main
 ```
 
-Ejecuta el binario:
+Ejecuta:
 
 ```bash
 ./bin/main
+```
+
+### Automático
+
+Este workflow es recomendado, más aún para proyectos grandes.
+
+Compila:
+
+```bash
+# Compila los archivos fuente que hayan sido actualizados
+# Esto llama compilación incremental
+make
+```
+
+Ejecuta:
+
+```bash
+# Simplemente un alias de `./bin/main`
+make run
+```
+
+Limpieza (por si se quiere compilar desde 0):
+
+```bash
+make clean
 ```
