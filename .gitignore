@@ -1,0 +1,7 @@
+# Ignorar binarios y archivos objeto compilados
+bin/*
+build/*
+
+# Salvar los .gitkeep para que las carpetas sigan existiendo en el repositorio
+!bin/.gitkeep
+!build/.gitkeep
