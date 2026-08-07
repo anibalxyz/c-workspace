@@ -56,7 +56,10 @@ clean:
 	@mkdir build bin
 	@touch build/.gitkeep bin/.gitkeep
 
+format:
+	@clang-format -i $(shell find src include -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp")
+
 run:
 	@./$(TARGET)
 
-.PHONY: all clean run
+.PHONY: all clean run format

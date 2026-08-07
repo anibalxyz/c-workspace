@@ -13,28 +13,19 @@ Instala todas las herramientas necesarias según la distribución Linux:
 sudo ./scripts/install.sh
 ```
 
+## Configuración para VS Code
+
+El repositorio incluye la carpeta `.vscode/` con la configuración del proyecto.
+
+Al abrir el directorio en Visual Studio Code, el IDE aplicará automáticamente las configuraciones para este proyecto.
+
+En caso de no contar con alguna extensión necesaria, el propio editor sugerirá su instalación al abrir el proyecto.
+
+**Extensiones:**
+
+- [C/C++ (Microsoft)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+
 ## Workflow
-
-### Manual
-
-Edita el código fuente `src/` y las cabeceras `include/` a tu gusto.
-
-En esta versión manual, se compilará **todo** (sin importar si hubieron cambios o no) directo al binario.
-
-Compila:
-
-```bash
-g++ -Wall -Wextra -Iinclude $(find src -type f \( -name "*.c" -o -name "*.cpp" \)) -o bin/app
-```
-
-Ejecuta:
-
-```bash
-./bin/app
-```
-
-> [!NOTE] si cambias el nombre del archivo principal, cambialo también en estos comandos.
-> bin/app -> bin/<archivo_principal>
 
 ### Automático
 
@@ -63,4 +54,38 @@ Limpieza (por si se quiere compilar desde 0):
 ```bash
 # Borra los directorios build/ y bin/
 make clean
+```
+
+Formateo:
+
+```bash
+# Formatea todos los archivos fuente y headers
+make format
+```
+
+### Manual
+
+Edita el código fuente `src/` y las cabeceras `include/` a tu gusto.
+
+En esta versión manual, se compilará **todo** (sin importar si hubieron cambios o no) directo al binario.
+
+Compila:
+
+```bash
+g++ -Wall -Wextra -Iinclude $(find src -type f \( -name "*.c" -o -name "*.cpp" \)) -o bin/app
+```
+
+Ejecuta:
+
+```bash
+./bin/app
+```
+
+> [!NOTE] si cambias el nombre del archivo principal, cambialo también en estos comandos.
+> bin/app -> bin/<archivo_principal>
+
+Formateo:
+
+```bash
+clang-format -i $(find src include -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp")
 ```
