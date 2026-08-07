@@ -1,31 +1,27 @@
-/*
-ifndef -> "If Not Defined"
-GREET_H  -> Nombre del archivo en MAYÚSCULAS con guion bajo (convención de macros/constantes).
-
-Revisa en toda la cadena de inclusión del proyecto si GREET_H ya fue procesado:
-- Si NO fue procesado: lee el contenido.
-- Si YA fue procesado (por cualquier otro archivo): salta hasta #endif.
-
-Evita que haya errores por redefinición de tipos y declaraciones al incluir el mismo archivo varias veces.
-Esto se llama "Include Guard".
-*/
-#ifndef GREET_H
-
-// Registra la macro GREET_H en el preprocesador para marcar este archivo como procesado.
-#define GREET_H
+// Sustituye el uso verboso de ifdef/endif.
+// No es del estandar oficial, pero es admitido por cualquier compilador moderno.
+#pragma once
 
 /*
-Declaración / Prototipo de la función (sin implementación)
+#ifdef __cplusplus |
+(...)              |
+#endif             |-> se ejecuta si el compilador es C++
 
-const -> garantiza que el parámetro (la cadena de caracteres) no pueda ser modificado dentro de la función.
-         La variable local (el puntero) sí se puede modificar, pero no el valor original:
-         - `name = "Otra cadena"` funciona
-         - `*name = "Otra cadena"` o `name[0] = "Otra cadena"` no funciona
-*     -> el parámetro es un puntero
+extern "C" {...}   -> se ejecuta bajo el estandar C. Hace varias cosas en las que no vale la pena
+                      entrar en detalle ahora (y me da pereza seguir estudiando para explicarlo resumido y preciso)
+                      Una de esas es que desactiva el Name Mangling de C++:
+                      mantiene el nombre de la función intacto en el binario para que el linker de C pueda encontrarlo.
 
-El puntero apunta al primer elemento de la cadena de caracteres.
+Sí, es verbosa la sintaxis, queda fea la anidación, pero ya descubrí una más sencilla.
+La incluyo en el siguiente commit para que esta versión quede documentada.
 */
-void greet(const char *name);
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
-// Cierra el bloque del "#ifndef GREET_H"
+  void greet(const char *name);
+
+#ifdef __cplusplus
+}
 #endif
