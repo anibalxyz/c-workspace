@@ -1,3 +1,5 @@
+MAKEFLAGS  += --no-print-directory
+
 CC         = gcc
 CXX        = g++
 
@@ -59,7 +61,12 @@ clean:
 format:
 	@clang-format -i $(shell find src include -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp")
 
+# Genera la base de datos de compilación (compile_commands.json)
+compiledb:
+	@make clean
+	@bear -- make
+
 run:
 	@./$(TARGET)
 
-.PHONY: all clean run format
+.PHONY: all clean run format compiledb

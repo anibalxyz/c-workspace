@@ -17,19 +17,26 @@ sudo ./scripts/install.sh
 
 El repositorio incluye la carpeta `.vscode/` con la configuración del proyecto.
 
-Al abrir el directorio en Visual Studio Code, el IDE aplicará automáticamente las configuraciones para este proyecto.
+**Configuraciones:**
 
-En caso de no contar con alguna extensión necesaria, el propio editor sugerirá su instalación al abrir el proyecto.
+- Formateo automático al guardar utilizando `.clang-format`
+- Lectura de `compile_commands.json` para IntelliSense (ver comando `compiledb` en workflow [automático](#automático))
+
+Al abrir el directorio en Visual Studio Code, el IDE aplicará automáticamente las configuraciones para este proyecto.
 
 **Extensiones:**
 
 - [C/C++ (Microsoft)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+
+> [!TIP] En caso de no contar con alguna extensión necesaria, el propio editor sugerirá su instalación al abrir el proyecto.
 
 ## Workflow
 
 ### Automático
 
 Este workflow es recomendado, más aún para proyectos grandes.
+
+También es al que le presto más atención, así que siempre estará actualizado, mientras que no aseguro lo mismo en el Manual.
 
 Compila:
 
@@ -62,6 +69,20 @@ Formateo:
 # Formatea todos los archivos fuente y headers
 make format
 ```
+
+Para generar `compile_commands.json`:
+
+```bash
+make compiledb
+```
+
+> [!TIP] Esto es útil para que el Intellisense del IDE funcione correctamente.
+>
+> Si el proyecto es pequeño va a funcionar igual gracias a las configuracion por defecto del IDE,
+> pero es recomendable usarlo por las dudas.
+>
+> Se debe ejecutar cuando se elimina, renombra o agrega un archivo (c o cpp),
+> o cuando se modifican las flags de compilación.
 
 ### Manual
 

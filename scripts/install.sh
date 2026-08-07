@@ -12,7 +12,7 @@ install_deps() {
 }
 
 install_deps_fedora() {
-  dnf install gcc-c++ make clang-format -y
+  dnf install gcc-c++ make clang-format bear -y
 }
 
 install_deps_ubuntu() {
@@ -20,7 +20,7 @@ install_deps_ubuntu() {
 }
 
 install_deps_debian() {
-  apt-get update && apt-get install -y build-essential clang-format
+  apt-get update && apt-get install -y build-essential clang-format bear
 }
 
 main() {
