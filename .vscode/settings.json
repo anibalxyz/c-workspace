@@ -6,5 +6,9 @@
     "editor.formatOnSave": true
   },
   "C_Cpp.formatting": "clangFormat",
-  "C_Cpp.default.compileCommands": "${workspaceFolder}/compile_commands.json"
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/compile_commands.json",
+  "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+  "C_Cpp.codeAnalysis.clangTidy.args": [
+    "--config-file=${workspaceFolder}/.clang-tidy"
+  ]
 }

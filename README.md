@@ -20,7 +20,10 @@ El repositorio incluye la carpeta `.vscode/` con la configuración del proyecto.
 **Configuraciones:**
 
 - Formateo automático al guardar utilizando `.clang-format`
-- Lectura de `compile_commands.json` para IntelliSense (ver comando `compiledb` en workflow [automático](#automático))
+- Lectura de `compile_commands.json` para IntelliSense
+  (ver comando `compiledb` en workflow [automático](#automático))
+- Escaneo de la configuración de `clang-tidy` para linting integrado en el IDE
+  (ver comando `lint` en workflow [automático](#automático))
 
 Al abrir el directorio en Visual Studio Code, el IDE aplicará automáticamente las configuraciones para este proyecto.
 
@@ -84,6 +87,19 @@ make compiledb
 > Se debe ejecutar cuando se elimina, renombra o agrega un archivo (c o cpp),
 > o cuando se modifican las flags de compilación.
 
+Linting (depende de tener generado `compile_commands.json`):
+
+```bash
+make lint
+```
+
+> [!TIP] Algunas reglas pueden ser demasiado estrictas si se está experimentando o aprendiendo.
+>
+> Si te molestan las podés desactivar todas seteando "C_Cpp.codeAnalysis.clangTidy.enabled" en false
+> en el archivo `.vscode/settings.json`.
+>
+> Si solo querés desactivar alguna puntual, borrala del la lista "Checks" en el archivo `.clang-tidy`.
+
 ### Manual
 
 Edita el código fuente `src/` y las cabeceras `include/` a tu gusto.
@@ -109,4 +125,10 @@ Formateo:
 
 ```bash
 clang-format -i $(find src include -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp")
+```
+
+Linting:
+
+```bash
+clang-tidy -p . $(shell find src -name "*.c" -o -name "*.cpp")
 ```

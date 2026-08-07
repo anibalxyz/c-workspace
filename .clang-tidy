@@ -1,0 +1,24 @@
+# Mayormente autogenerado, pero se agregan algunos checks.
+# Recomiendo buscar qué aporta cada uno.
+---
+Checks: "clang-diagnostic-*,clang-analyzer-*,bugprone-*,performance-*,readability-*,misc-*"
+WarningsAsErrors: ""
+HeaderFileExtensions:
+  - ""
+  - h
+  - hh
+  - hpp
+  - hxx
+ImplementationFileExtensions:
+  - c
+  - cc
+  - cpp
+  - cxx
+HeaderFilterRegex: "include/.*"
+ExcludeHeaderFilterRegex: ""
+FormatStyle: none
+User: anibalxyz
+CheckOptions: {}
+SystemHeaders: false
+...
+

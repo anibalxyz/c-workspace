@@ -61,6 +61,10 @@ clean:
 format:
 	@clang-format -i $(shell find src include -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp")
 
+# Analiza el código buscando posibles errores de lógica, memoria y buenas prácticas
+lint:
+	@clang-tidy -p . $(shell find src -name "*.c" -o -name "*.cpp")
+
 # Genera la base de datos de compilación (compile_commands.json)
 compiledb:
 	@make clean
@@ -69,4 +73,4 @@ compiledb:
 run:
 	@./$(TARGET)
 
-.PHONY: all clean run format compiledb
+.PHONY: all clean run format compiledb lint
