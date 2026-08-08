@@ -7,7 +7,7 @@ log() {
 
 check_root() {
   if [ "$EUID" -ne 0 ]; then
-    echo "Error: Este script debe ejecutarse como root (usa sudo)." >&2
+    echo "Error: Este script debe ejecutarse como root (usá sudo)." >&2
     exit 1
   fi
 }
@@ -25,7 +25,7 @@ detect_os() {
       fi
       ;;
     darwin*)
-      OS_TYPE="macos"
+      os_type="macos"
       ;;
     msys*|cygwin*|mingw*)
       os_type="windows"
@@ -37,10 +37,10 @@ detect_os() {
 
   readonly OS_TYPE="$os_type"
 
-  log "OS_TYPE detected: $OS_TYPE"
+  log "OS_TYPE detectado: $OS_TYPE"
 
   if [ "$OS_TYPE" == "windows" ] || [ "$OS_TYPE" == "macos" ] || [ "$OS_TYPE" == "unknown" ] || [ "$OS_TYPE" == "linux" ]; then
-    log "OS_TYPE not supported: $OS_TYPE"
+    log "OS_TYPE no soportado: $OS_TYPE"
     exit 1
   fi
 }
