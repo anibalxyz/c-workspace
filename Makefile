@@ -3,11 +3,11 @@ MAKEFLAGS  += --no-print-directory
 CC         = gcc
 CXX        = g++
 
-# -Wall					: (W = Warnings) activa las advertencias principales (variables no usadas, etc.)
-# -Wextra 			: Activa advertencias adicionales y más estrictas (comparación signed/unsigned, etc.)
+# -Wall         : (W = Warnings) activa las advertencias principales (variables no usadas, etc.)
+# -Wextra       : Activa advertencias adicionales y más estrictas (comparación signed/unsigned, etc.)
 # -Iinclude     : Agrega la carpeta include/ a la búsqueda de headers
 # -MMD          : Genera archivos .d con las dependencias de los headers locales
-# -MP 					: Crea una regla vacía por cada header para que 'make' no falle si un .h es borrado o renombrado.
+# -MP           : Crea una regla vacía por cada header para que 'make' no falle si un .h es borrado o renombrado.
 CFLAGS      = -Wall -Wextra -Iinclude -MMD -MP
 CXXFLAGS    = -Wall -Wextra -Iinclude -MMD -MP
 
@@ -70,7 +70,17 @@ compiledb:
 	@make clean
 	@bear -- make
 
+help:
+	@echo "Comandos disponibles:"
+	@echo "  make            - Compila el proyecto (incremental)         "
+	@echo "  make run        - Ejecuta la aplicación                     "
+	@echo "  make clean      - Limpia archivos de compilación            "
+	@echo "  make format     - Aplica clang-format en src/ e include/    "
+	@echo "  make compiledb  - Genera compile_commands.json con Bear     "
+	@echo "  make lint       - Ejecuta análisis estático con clang-tidy  "
+	@echo "                    (depende de compile_commands.json)        "
+
 run:
 	@./$(TARGET)
 
-.PHONY: all clean run format compiledb lint
+.PHONY: all help run clean format compiledb lint

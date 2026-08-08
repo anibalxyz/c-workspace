@@ -32,6 +32,13 @@ Agregué un **script** para viajar entre esos cambios, para poder ver cómo se f
 - **Autocompletado e IntelliSense:** Generación de `compile_commands.json` (`bear`) para navegación precisa entre símbolos en VS Code y otros IDEs.
 - **Instalador de dependencias:** Script en `scripts/install.sh` compatible con Ubuntu, Debian y Fedora.
 
+**¿Qué sigue?:**
+
+- **Detección de fugas de memoria:**
+  Integración de análisis dinámico (Valgrind / AddressSanitizer) para rastrear fugas de memoria y accesos inválidos _en tiempo de ejecución_.
+- **Depuración visual en VS Code:**
+  Configuración para depurar, usar puntos de interrupción e inspeccionar variables directamente en el editor.
+
 ## Instalación
 
 Instala todas las herramientas necesarias según la distribución Linux (por ahora Debian/Ubuntu y Fedora):
@@ -69,6 +76,8 @@ Al abrir el directorio en VS Code, el IDE aplicará **automáticamente** las con
 Este workflow es recomendado, más aún para proyectos medianos/grandes.
 
 También es al que le presto más atención, así que siempre va a estar actualizado, mientras que no aseguro lo mismo en el Manual.
+
+Luego podés hacer `make help` para ver los comandos listados y más resumidos, sin necesidad de tener esto abierto.
 
 Compila:
 
