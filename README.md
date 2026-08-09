@@ -1,9 +1,21 @@
 # c-workspace
 
-Entorno de desarrollo para trabajar con **C** y **C++** y con integración para **VS Code**.
+Entorno de desarrollo para trabajar con **C** y **C++**, con integración para **VS Code**.
 
 Por defecto se incluye un "Hello World" y algunos archivos que combinan **C** y **C++** para tener de ejemplo un poco de todo.
 _Se pueden borrar tranquilamente._ Lo importante es la estructura de carpetas y, obvio, que esté el archivo principal.
+
+<details>
+<summary>Tabla de Contenidos</summary>
+
+- [Introducción](#introducción)
+- [Instalación](#instalación)
+- [Configuración para VS Code](#configuración-para-vs-code)
+- [Workflow](#workflow)
+  - [Automático](#automático)
+  - [Manual](#manual)
+
+</details>
 
 ## Introducción
 
@@ -15,15 +27,16 @@ así como algunas cosas de sintaxis básicas que fui anotando para quienes no se
 Agregué un **script** para viajar entre esos cambios, para poder ver cómo se fueron agregando las distintas partes:
 
 ```bash
-# Muestra el instructivo (inicio, siguiente, anterior, etc)
+# Muestra el instructivo (inicio, siguiente, anterior, etc.)
 ./scripts/viaje.sh ayuda
 ```
 
-> [!NOTE] Aunque la idea principal es que se use en modo solo lectura,
-> tiene protección por si hacés cambios mientras viajas (por si experimentás),
+> [!NOTE]
+> Aunque la idea principal es que se use en modo solo lectura,
+> tiene protección por si haces cambios mientras viajas (por si experimentas),
 > pero podría fallar en algún caso que no haya testado.
 
-**¿Qué incluye?:**
+**¿Qué incluye?**
 
 - **Soporte Híbrido C/C++:** Estructura preparada para compilar módulos en C puro, C++ o interoperabilidad entre ambos (`extern "C"`).
 - **Sistema de compilación automatizado (Make):** Manejo de compilación incremental, banderas de optimización/warning y rastreo automático de headers.
@@ -32,7 +45,7 @@ Agregué un **script** para viajar entre esos cambios, para poder ver cómo se f
 - **Autocompletado e IntelliSense:** Generación de `compile_commands.json` (`bear`) para navegación precisa entre símbolos en VS Code y otros IDEs.
 - **Instalador de dependencias:** Script en `scripts/install.sh` compatible con Ubuntu, Debian y Fedora.
 
-**¿Qué sigue?:**
+**¿Qué sigue?**
 
 - **Detección de fugas de memoria:**
   Integración de análisis dinámico (Valgrind / AddressSanitizer) para rastrear fugas de memoria y accesos inválidos _en tiempo de ejecución_.
@@ -41,13 +54,38 @@ Agregué un **script** para viajar entre esos cambios, para poder ver cómo se f
 
 ## Instalación
 
+### 1. Clonar el repositorio
+
+Si no tienes `git`, primero instálalo:
+
+```bash
+# Debian/Ubuntu
+sudo apt-get install -y git
+```
+
+o
+
+```bash
+# Fedora
+sudo dnf install -y git
+```
+
+Luego clona el repositorio:
+
+```bash
+git clone https://github.com/anibalxyz/c-workspace.git
+cd c-workspace
+```
+
+### 2. Instalar herramientas
+
 Instala todas las herramientas necesarias según la distribución Linux (por ahora Debian/Ubuntu y Fedora):
 
 ```bash
 sudo ./scripts/install.sh
 ```
 
-**Esto va a instalar:** `git`, `gcc`, `g++`, `make`, `clang-format`, `clang-tidy`, `bear`
+**Esto instalará:** `gcc`, `g++`, `make`, `clang-format`, `clang-tidy`, `bear`
 
 ## Configuración para VS Code
 
@@ -67,7 +105,8 @@ Al abrir el directorio en VS Code, el IDE aplicará **automáticamente** las con
 
 - [C/C++ (Microsoft)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
 
-> [!TIP] En caso de no contar con alguna extensión necesaria, el propio editor _sugerirá su instalación_ al abrir el proyecto.
+> [!TIP]
+> En caso de no contar con alguna extensión necesaria, el propio editor _sugerirá su instalación_ al abrir el proyecto.
 
 ## Workflow
 
@@ -77,52 +116,53 @@ Este workflow es recomendado, más aún para proyectos medianos/grandes.
 
 También es al que le presto más atención, así que siempre va a estar actualizado, mientras que no aseguro lo mismo en el Manual.
 
-Luego podés hacer `make help` para ver los comandos listados y más resumidos, sin necesidad de tener esto abierto.
+Luego puedes ejecutar `make help` para ver los comandos listados y más resumidos, sin necesidad de tener esto abierto.
 
-Compila:
+Compilar:
 
 ```bash
-# Compila los archivos fuente que hayan sido actualizados. Esto llama compilación incremental
+# Compila los archivos fuente que hayan sido actualizados. Esto se llama compilación incremental
 # Opcional: MAIN=<archivo_principal> por si cambias el nombre del punto de entrada actual
 make
 ```
 
-Ejecuta:
+Ejecutar:
 
 ```bash
 # Simplemente un alias de `./bin/app`
-# Opcional: MAIN=<archivo_principal>. Si en `make` pasaste un nombre distinto, usalo acá también
+# Opcional: MAIN=<archivo_principal>. Si en `make` pasaste un nombre distinto, úsalo aquí también
 make run
 ```
 
-Para no repetir `MAIN=<archivo_principal>` a cada rato, podés modificarlo en el archivo Makefile directamente.
+Para no repetir `MAIN=<archivo_principal>` constantemente, puedes modificarlo en el archivo Makefile directamente.
 
-Limpieza (por si se quiere compilar desde 0):
+Limpiar (por si se quiere compilar desde cero):
 
 ```bash
 # Borra los directorios build/ y bin/
 make clean
 ```
 
-Formateo:
+Formatear:
 
 ```bash
 # Formatea todos los archivos fuente y headers
 make format
 ```
 
-Para generar `compile_commands.json`:
+Generar `compile_commands.json`:
 
 ```bash
 make compiledb
 ```
 
-> [!TIP] Esto es útil para que el Intellisense del IDE funcione correctamente.
+> [!TIP]
+> Esto es útil para que el IntelliSense del IDE funcione correctamente.
 >
-> Si el proyecto es pequeño va a funcionar igual gracias a las configuracion por defecto del IDE,
-> pero es recomendable usarlo por las dudas.
+> Si el proyecto es pequeño va a funcionar igual gracias a las configuraciones por defecto del IDE,
+> pero es recomendable usarlo por si acaso.
 >
-> Se debe ejecutar cuando se elimina, renombra o agrega un archivo (c o cpp),
+> Se debe ejecutar cuando se elimina, renombra o agrega un archivo (.c o .cpp),
 > o cuando se modifican las flags de compilación.
 
 Linting (depende de tener generado `compile_commands.json`):
@@ -131,35 +171,37 @@ Linting (depende de tener generado `compile_commands.json`):
 make lint
 ```
 
-> [!TIP] Algunas reglas pueden ser demasiado estrictas si se está experimentando o aprendiendo.
+> [!TIP]
+> Algunas reglas pueden ser demasiado estrictas si se está experimentando o aprendiendo.
 >
-> Si te molestan las podés desactivar todas seteando "C_Cpp.codeAnalysis.clangTidy.enabled" en false
+> Si te molestan las puedes desactivar todas seteando "C_Cpp.codeAnalysis.clangTidy.enabled" en false
 > en el archivo `.vscode/settings.json`.
 >
-> Si solo querés desactivar alguna puntual, borrala del la lista "Checks" en el archivo `.clang-tidy`.
+> Si solo quieres desactivar alguna puntual, bórrala de la lista "Checks" en el archivo `.clang-tidy`.
 
 ### Manual
 
 Edita el código fuente `src/` y las cabeceras `include/` a tu gusto.
 
-En esta versión manual, se compilará **todo** (sin importar si hubieron cambios o no) directo al binario.
+En esta versión manual, se compilará **todo** (sin importar si hubo cambios o no) directo al binario.
 
-Compila:
+Compilar:
 
 ```bash
 g++ -Wall -Wextra -Iinclude $(find src -type f \( -name "*.c" -o -name "*.cpp" \)) -o bin/app
 ```
 
-Ejecuta:
+Ejecutar:
 
 ```bash
 ./bin/app
 ```
 
-> [!NOTE] si cambias el nombre del archivo principal, cambialo también en estos comandos.
+> [!NOTE]
+> Si cambias el nombre del archivo principal, cámbialo también en estos comandos.
 > bin/app -> bin/<archivo_principal>
 
-Formateo:
+Formatear:
 
 ```bash
 clang-format -i $(find src include -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp")
