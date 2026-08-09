@@ -15,7 +15,6 @@ ImplementationFileExtensions:
   - cpp
   - cxx
 HeaderFilterRegex: "include/.*"
-ExcludeHeaderFilterRegex: ""
 FormatStyle: none
 User: anibalxyz
 CheckOptions: {}
